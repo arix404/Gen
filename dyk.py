@@ -1,29 +1,51 @@
-import heapq
 
-n = int(input("Nodes: "))
-graph = {i: [] for i in range(n)}
+n = 4
 
-e = int(input("Edges: "))
-for _ in range(e):
-    u,v,w = map(int, input("u v w: ").split())
-    graph[u].append((v,w))
 
-start = int(input("Start node: "))
+graph = [
 
-def dijkstra(start):
-    dist = {i: float('inf') for i in graph}
-    dist[start] = 0
+    [0, 1, 4, 0],
+    [1, 0, 2, 6],
+    [4, 2, 0, 3],
+    [0, 6, 3, 0]
 
-    pq = [(0,start)]
+]
 
-    while pq:
-        d,node = heapq.heappop(pq)
 
-        for nei,w in graph[node]:
-            if d+w < dist[nei]:
-                dist[nei] = d+w
-                heapq.heappush(pq,(dist[nei],nei))
+start = 0
 
-    print(dist)
 
-dijkstra(start)
+dist = [999] * n
+
+
+dist[start] = 0
+
+
+visited = [False] * n
+
+for i in range(n):
+
+    
+    min_dist = 999
+    u = -1
+
+    for j in range(n):
+
+        if not visited[j] and dist[j] < min_dist:
+
+            min_dist = dist[j]
+            u = j
+
+    
+    visited[u] = True
+
+    
+    for v in range(n):
+
+        if graph[u][v] != 0 and not visited[v]:
+
+            if dist[u] + graph[u][v] < dist[v]:
+
+                dist[v] = dist[u] + graph[u][v]
+
+print("Shortest distances:", dist)

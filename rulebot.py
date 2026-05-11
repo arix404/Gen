@@ -5,12 +5,12 @@ def chatbot():
     while True:
         user = input("You: ").lower()
 
-        # Exit
+        
         if "bye" in user:
             print("Bot: Thank you! Have a great day.")
             break
 
-        # Intent recognition (basic AI logic)
+        
         elif any(word in user for word in ["hello", "hi", "hey"]):
             print("Bot: Hello! How can I assist you?")
 

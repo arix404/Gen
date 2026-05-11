@@ -1,27 +1,41 @@
-import heapq
+graph = {}
 
 n = int(input("Enter number of nodes: "))
-graph = {i: [] for i in range(n)}
+
+for i in range(n):
+    graph[i] = []
 
 e = int(input("Enter number of edges: "))
-for _ in range(e):
-    u,v,w = map(int, input("u v weight: ").split())
-    graph[u].append((w,v))
-    graph[v].append((w,u))
 
-start = int(input("Start node: "))
+for i in range(e):
 
-def prim(start):
-    visited = set([start])
-    edges = graph[start]
-    heapq.heapify(edges)
+    u, v, w = map(int, input("Enter u v w: ").split())
 
-    while edges:
-        w, v = heapq.heappop(edges)
-        if v not in visited:
-            print(f"{start}-{v} = {w}")
-            visited.add(v)
-            for edge in graph[v]:
-                heapq.heappush(edges, edge)
+    graph[u].append((v, w))
+    graph[v].append((u, w))
 
-prim(start)
+visited = []
+
+start = int(input("Enter starting node: "))
+
+visited.append(start)
+
+print("Edges in MST:")
+
+while len(visited) < n:
+
+    min_edge = [None, None, 9999]
+
+    for node in visited:
+
+        for neighbour, weight in graph[node]:
+
+            if neighbour not in visited:
+
+                if weight < min_edge[2]:
+
+                    min_edge = [node, neighbour, weight]
+
+    print(min_edge[0], "-", min_edge[1], "=", min_edge[2])
+
+    visited.append(min_edge[1])

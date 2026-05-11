@@ -12,12 +12,17 @@ start = input("Enter starting node: ")
 visited = []
 queue = [start]
 
-def bfs():
-    while queue:
-        node = queue.pop(0)
-        if node not in visited:
-            print(node, end=" ")
-            visited.append(node)
-            queue.extend(graph[node])
+def bfs(queue, visited):
+    if not queue:
+        return
 
-bfs()
+    node = queue.pop(0)
+
+    if node not in visited:
+        print(node,end=" ")
+        visited.append(node)
+        queue.extend(graph[node])
+
+    bfs(queue, visited)
+
+bfs(queue, visited)
