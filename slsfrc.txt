@@ -1,0 +1,34 @@
+https://developer.salesforce.com/signup
+
+
+public class StudentApp {
+
+    public static void studentInfo() {
+
+        String studentName = 'Riya';
+        Integer marks = 95;
+
+        System.debug('Student Name: ' + studentName);
+        System.debug('Marks: ' + marks);
+
+        if(marks >= 40) {
+            System.debug('Result: PASS');
+        }
+        else {
+            System.debug('Result: FAIL');
+        }
+    }
+}
+
+
+
+
+StudentApp.studentInfo();
+
+
+
+
+
+
+
+
